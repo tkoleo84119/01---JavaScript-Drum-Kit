@@ -1,5 +1,7 @@
 function playSound(e) {
-  const element = document.querySelector(`div[data-key="${e.keyCode}"]`);
+  const element =
+    document.querySelector(`div[data-key="${e.keyCode}"]`) ||
+    e.target.closest(".key");
   if (!element) return;
 
   const audio = document.querySelector(
@@ -12,6 +14,7 @@ function playSound(e) {
 }
 
 window.addEventListener("keydown", playSound);
+window.addEventListener("click", playSound);
 window.addEventListener("transitionend", (e) => {
   if (e.propertyName !== "transform") return;
   e.target.classList.remove("playing");
