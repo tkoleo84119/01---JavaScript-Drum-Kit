@@ -11,6 +11,12 @@ function playSound(e) {
   element.classList.add("playing");
   audio.currentTime = 0; // reset audio
   audio.play();
+
+  // fix bug when press key for a long time, the class: playing can't be remove
+  audio.onended = () => {
+    if (element.classList.contains("playing"))
+      element.classList.remove("playing");
+  };
 }
 
 window.addEventListener("keydown", playSound);
